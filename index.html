@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tic tac toe</title>
+    <style>
+        *
+{
+    margin:0;
+    padding:0;
+}
+body
+{
+    background-color: aqua;
+    text-align: center;
+}
+.container
+{
+    height:70vh;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    gap: 10px;
+}
+.game
+{
+    height:60vmin;
+    width:60vmin;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-items: center;
+    gap:10px
+}
+.box
+{
+    height:18vmin;
+    width:18vmin;
+    border-radius: 20px;
+    gap:10px;
+    font-size: 8vmin;
+    background-color: green;
+    color:red;
+}
+
+#restart
+{
+    height:50px;
+    width:50px;
+    background-color: blue;
+    border-radius: 20px;
+    color:black
+}
+.message
+{
+    display:none;
+}
+    </style>
+</head>
+<body>
+        <h2 class="message"></h2>
+        <div class=" container">
+        <div class="game">
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+        </div>
+        
+    </div>  
+    <button id="restart">restart game</button> 
+    <script>
+        let restart=document.querySelector("#restart");
+let boxes=document.querySelectorAll(".box");
+let message=document.querySelector(".message");
+let turn0=true;
+
+const winpattern=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+
+
+boxes.forEach((box)=>
+{
+    box.addEventListener("click",()=>
+    {
+        if(turn0)
+        {
+            box.innerText="O"
+            turn0=false;
+        }
+        else
+        {
+            box.innerText="X";
+            turn0=true;
+        }
+        box.disabled=true;
+        checkwinner();
+        
+    });
+});
+
+const disabled=()=>
+{
+    for(let box of boxes)
+    {
+        box.disabled=true;
+    }
+}
+
+const enable=()=>
+{
+    for(let box of  boxes)
+    {
+        box.disabled=false;
+        box.innerText= ""
+       /* message.innerText=""*/
+    }
+};
+
+
+const checkwinner=()=>
+{
+    for(let win of winpattern)
+    {   
+        let pattern0=boxes[win[0]].innerText;
+        let pattern1=boxes[win[1]].innerText;
+        var pattern2=boxes[win[2]].innerText;
+
+        if(pattern0 !=""&& pattern1!="" &&pattern2 != "")
+        {
+            if(pattern0===pattern1 && pattern1===pattern2)
+            {
+                console.log(pattern0);
+                showwin(pattern0);
+            }
+        }
+    }
+};
+
+let showwin=(pattern) =>
+{  
+    message.style.color="green"; 
+    message.innerText=`congratulation winner is ${pattern}`
+    message.classList.remove("message");
+    disabled();
+};
+
+const restartgame=()=>
+{
+    turn0=true;
+    enable();
+    console.log("vinay kumar");
+    message.classList.add("message");
+};
+restart.addEventListener("click",restartgame);
+    </script> 
+</body>
+</html>
