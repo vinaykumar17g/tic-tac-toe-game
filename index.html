@@ -49,6 +49,7 @@ body
     height:50px;
     width:100px;
     border-radius: 20px;
+background:black;
     color:white;
 }
 .message
@@ -143,7 +144,7 @@ const checkwinner=()=>
 
 let showwin=(pattern) =>
 {  
-    message.style.color="green"; 
+    message.style.color="white"; 
     message.innerText=`congratulation winner is ${pattern}`
     message.classList.remove("message");
     disabled();
